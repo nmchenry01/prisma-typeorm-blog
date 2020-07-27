@@ -1,1 +1,1 @@
-# Prisma vs TypeORM vs Sequelize
+# Prisma vs TypeORM
