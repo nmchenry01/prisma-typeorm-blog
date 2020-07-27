@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A demo usage of the Prisma DB Toolkit",
   "scripts": {
+    "start": "node dist/index.js",
     "build": "rimraf ./build && tsc",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'",
     "lint": "eslint --fix 'src/**/*.ts' 'tests/**/*.ts'",
