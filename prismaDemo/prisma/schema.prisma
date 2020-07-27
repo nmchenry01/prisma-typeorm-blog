@@ -8,17 +8,26 @@ datasource db {
 }
 
 model Company {
-  createdAt DateTime  @default(now())
   id        Int       @default(autoincrement()) @id
-  name      String?
-  Product   Product[]
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
+model Customer {
+  id        Int       @default(autoincrement()) @id
+  username  String    @unique
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[] @relation(references: [id])
 }
 
 model Product {
-  createdAt   DateTime @default(now())
+  id          Int        @default(autoincrement()) @id
+  name        String     @unique
   description String?
-  id          Int      @default(autoincrement()) @id
-  name        String?
-  productId   Int
-  Company     Company  @relation(fields: [productId], references: [id])
+  createdAt   DateTime   @default(now())
+  companyId   Int
+  company     Company    @relation(fields: [companyId], references: [id])
+  customers   Customer[] @relation(references: [id])
 }
