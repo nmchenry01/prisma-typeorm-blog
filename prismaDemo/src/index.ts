@@ -1,4 +1,8 @@
-import { PrismaClient, CompanyCreateInput } from '@prisma/client';
+import {
+  PrismaClient,
+  CompanyCreateInput,
+  CustomerCreateInput,
+} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -31,7 +35,11 @@ const findAllCustomers = async () => {
   });
 };
 
-// const createCustomer = async (input: CreateCustomer)
+const createCustomer = async (input: CustomerCreateInput) => {
+  return prisma.customer.create({
+    data: input,
+  });
+};
 
 const main = async (): Promise<void> => {
   // Create company without products
@@ -54,17 +62,16 @@ const main = async (): Promise<void> => {
   console.dir(products, { depth: null });
 
   // Create a customer and link to product
-  await prisma.customer.create({
-    data: {
-      username: 'admin',
-      email: 'admin@gmail.com',
-      products: {
-        connect: {
-          id: 1,
-        },
+  const customerCreateInput: CustomerCreateInput = {
+    username: 'admin',
+    email: 'admin@gmail.com',
+    products: {
+      connect: {
+        name: 'Widget',
       },
     },
-  });
+  };
+  await createCustomer(customerCreateInput);
 
   const customers = await findAllCustomers();
   console.dir(customers, { depth: null });
