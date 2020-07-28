@@ -5,6 +5,7 @@ import {
   findCustomerUsernamesForCompany,
   findCompaniesThatMakeCarsOrPrinters,
 } from './utils/read';
+import { updateProductDescription } from './utils/update';
 
 const prisma = new PrismaClient();
 
@@ -23,6 +24,9 @@ const main = async (): Promise<void> => {
   // Find companies that make cars or printers
   const companies = await findCompaniesThatMakeCarsOrPrinters(prisma);
   console.dir(companies, { depth: null });
+
+  const updatedProduct = await updateProductDescription(prisma);
+  console.dir(updatedProduct, { depth: null });
 };
 
 main()
