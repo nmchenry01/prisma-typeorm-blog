@@ -1,80 +1,28 @@
+import { PrismaClient } from '@prisma/client';
+import { createAll } from './utils/create';
 import {
-  PrismaClient,
-  CompanyCreateInput,
-  CustomerCreateInput,
-} from '@prisma/client';
+  findAllCustomers,
+  findCustomerUsernamesForCompany,
+  findCompaniesThatMakeCarsOrPrinters,
+} from './utils/read';
 
 const prisma = new PrismaClient();
 
-const createCompany = async (input: CompanyCreateInput) => {
-  await prisma.company.create({ data: input });
-};
-
-const findAllCompanies = async () => {
-  return prisma.company.findMany({
-    // Include relations
-    include: {
-      products: true,
-    },
-  });
-};
-
-const findAllProducts = async () => {
-  return prisma.product.findMany({
-    include: {
-      customers: true,
-    },
-  });
-};
-
-const findAllCustomers = async () => {
-  return prisma.customer.findMany({
-    include: {
-      products: true,
-    },
-  });
-};
-
-const createCustomer = async (input: CustomerCreateInput) => {
-  return prisma.customer.create({
-    data: input,
-  });
-};
-
 const main = async (): Promise<void> => {
-  // Create company without products
-  const companyCreateInput: CompanyCreateInput = {
-    name: 'Acme',
-    products: {
-      create: {
-        name: 'Widget',
-        description: 'A type of product',
-      },
-    },
-  };
-  await createCompany(companyCreateInput);
-  // Get all companies
-  const companies = await findAllCompanies();
-  console.dir(companies, { depth: null });
+  // Seed data
+  await createAll(prisma);
 
-  // Get all products
-  const products = await findAllProducts();
-  console.dir(products, { depth: null });
-
-  // Create a customer and link to product
-  const customerCreateInput: CustomerCreateInput = {
-    username: 'admin',
-    email: 'admin@gmail.com',
-    products: {
-      connect: {
-        name: 'Widget',
-      },
-    },
-  };
-  await createCustomer(customerCreateInput);
-
-  const customers = await findAllCustomers();
+  // Find all customers and their products
+  const customers = await findAllCustomers(prisma);
   console.dir(customers, { depth: null });
+
+  // Find all customer usernames for a specific company (Acme)
+  const usernames = await findCustomerUsernamesForCompany(prisma);
+  console.dir(usernames, { depth: null });
+
+  // Find companies that make cars or printers
+  const companies = await findCompaniesThatMakeCarsOrPrinters(prisma);
+  console.dir(companies, { depth: null });
 };
 
 main()
