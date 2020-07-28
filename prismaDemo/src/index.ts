@@ -7,6 +7,7 @@ import {
 } from './utils/read';
 import { updateProductDescription } from './utils/update';
 import { deleteCustomer } from './utils/delete';
+import { experimentalTransaction } from './utils/transaction';
 
 const prisma = new PrismaClient();
 
@@ -30,9 +31,13 @@ const main = async (): Promise<void> => {
   const updatedProduct = await updateProductDescription(prisma);
   console.dir(updatedProduct, { depth: null });
 
-  // Delete a company (assumes there is a cascade relationship on fk)
-  const deletedCompany = await deleteCustomer(prisma);
-  console.dir(deletedCompany, { depth: null });
+  // Delete a customer (assumes there is a cascade relationship on fk)
+  const deletedCustomer = await deleteCustomer(prisma);
+  console.dir(deletedCustomer, { depth: null });
+
+  // Experimental transaction API
+  const results = await experimentalTransaction(prisma);
+  console.dir(results, { depth: null });
 };
 
 main()

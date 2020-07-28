@@ -61,8 +61,8 @@ export const createProducts = async (prisma: PrismaClient) => {
 export const createCustomers = async (prisma: PrismaClient) => {
   await prisma.customer.create({
     data: {
-      username: 'user1',
-      email: 'user1@gmail.com',
+      username: 'User1',
+      email: 'User1@gmail.com',
       products: {
         connect: [
           {
@@ -78,8 +78,8 @@ export const createCustomers = async (prisma: PrismaClient) => {
 
   await prisma.customer.create({
     data: {
-      username: 'user2',
-      email: 'user2@gmail.com',
+      username: 'User2',
+      email: 'User2@gmail.com',
       products: {
         connect: { name: 'Printer' },
       },
@@ -88,18 +88,8 @@ export const createCustomers = async (prisma: PrismaClient) => {
 
   await prisma.customer.create({
     data: {
-      username: 'user2',
-      email: 'user2@gmail.com',
-      products: {
-        connect: { name: 'Dynamite' },
-      },
-    },
-  });
-
-  await prisma.customer.create({
-    data: {
-      username: 'user3',
-      email: 'user3@gmail.com',
+      username: 'User3',
+      email: 'User3@gmail.com',
       products: {
         connect: [
           {
@@ -115,6 +105,13 @@ export const createCustomers = async (prisma: PrismaClient) => {
       },
     },
   });
+
+  await prisma.customer.create({
+    data: {
+      username: 'User4',
+      email: 'user4@gmail.com',
+    },
+  });
 };
 
 export const createAll = async (prisma: PrismaClient) => {
@@ -127,8 +124,8 @@ export const createAll = async (prisma: PrismaClient) => {
           description: 'It goes "boom"',
           customers: {
             create: [
-              { username: 'user2', email: 'user2@gmail.com' },
-              { username: 'user3', email: 'user3@gmail.com' },
+              { username: 'User2', email: 'User2@gmail.com' },
+              { username: 'User3', email: 'User3@gmail.com' },
             ],
           },
         },
@@ -144,8 +141,8 @@ export const createAll = async (prisma: PrismaClient) => {
           name: 'Car',
           description: 'A fine automobile',
           customers: {
-            create: { username: 'user1', email: 'user1@gmail.com' },
-            connect: { username: 'user3' },
+            create: { username: 'User1', email: 'User1@gmail.com' },
+            connect: { username: 'User3' },
           },
         },
       },
@@ -160,10 +157,17 @@ export const createAll = async (prisma: PrismaClient) => {
           name: 'Printer',
           description: 'It prints things',
           customers: {
-            connect: { username: 'user2' },
+            connect: { username: 'User2' },
           },
         },
       },
+    },
+  });
+
+  await prisma.customer.create({
+    data: {
+      username: 'User4',
+      email: 'User4@gmail.com',
     },
   });
 };
