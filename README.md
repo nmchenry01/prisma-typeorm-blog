@@ -6,7 +6,7 @@ The `prismaDemo` folder contains the Prisma 2 example, and the `typeormDemo` fol
 
 ## Running Locally
 
-A `docker-compose.yml` file is included in the root of this repository. Run `docker-compose up --build` (assuming the Docker daemon is installed/running) and a local version of Postgres and PGAdmin will be spun up. The username for PGAdmin is `pgadmin4@pgadmin.org` and the password is `password`. 
+A `docker-compose.yml` file is included in the root of this repository. Run `docker-compose up --build` (assuming the Docker daemon is installed/running) and a local version of Postgres and PGAdmin will be spun up. The username for PGAdmin is `pgadmin4@pgadmin.org` and the password is `password`. PGAdmin will be running on `localhost:8080`.
 
 Once logged in to PGAdmin, you can connect to the database on port 5432 using the hostname `postgres` (the container/service name) with username `admin` and password `password`.
 
