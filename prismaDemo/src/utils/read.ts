@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 
-// Simple find all statement
 export const findAllCustomers = async (prisma: PrismaClient) => {
   return prisma.customer.findMany({
     include: {
@@ -9,7 +8,6 @@ export const findAllCustomers = async (prisma: PrismaClient) => {
   });
 };
 
-// Find company by name
 export const findCompanyByName = async (prisma: PrismaClient) => {
   return prisma.company.findOne({
     where: {
@@ -18,7 +16,6 @@ export const findCompanyByName = async (prisma: PrismaClient) => {
   });
 };
 
-// Find customers for each company, limit output to just username
 export const findCustomerUsernamesForCompany = async (prisma: PrismaClient) => {
   return prisma.customer.findMany({
     select: {
@@ -34,7 +31,6 @@ export const findCustomerUsernamesForCompany = async (prisma: PrismaClient) => {
   });
 };
 
-// Find companies that make cars or printers
 export const findCompaniesThatMakeCarsOrPrinters = async (
   prisma: PrismaClient,
 ) => {

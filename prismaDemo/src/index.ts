@@ -40,13 +40,13 @@ const main = async (): Promise<void> => {
   const results = await experimentalTransaction(prisma);
   console.dir(results, { depth: null });
 
+  // Run a raw SQL query
   const rawSQLResult = await rawSQLQuery(prisma);
   console.dir(rawSQLResult, { depth: null });
 };
 
 main()
   .catch((error) => {
-    // eslint-disable-next-line no-console
     console.error(error.stack);
     process.exit(1);
   })
