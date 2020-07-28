@@ -8,6 +8,7 @@ import {
 import { updateProductDescription } from './utils/update';
 import { deleteCustomer } from './utils/delete';
 import { experimentalTransaction } from './utils/transaction';
+import { rawSQLQuery } from './utils/rawSql';
 
 const prisma = new PrismaClient();
 
@@ -38,6 +39,9 @@ const main = async (): Promise<void> => {
   // Experimental transaction API
   const results = await experimentalTransaction(prisma);
   console.dir(results, { depth: null });
+
+  const rawSQLResult = await rawSQLQuery(prisma);
+  console.dir(rawSQLResult, { depth: null });
 };
 
 main()
