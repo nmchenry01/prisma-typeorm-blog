@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-export const createCompanies = async (prisma: PrismaClient): Promise<void> => {
+export const createCompanies = async (prisma: PrismaClient) => {
   await prisma.company.create({
     data: {
       name: 'Acme',
@@ -20,7 +20,7 @@ export const createCompanies = async (prisma: PrismaClient): Promise<void> => {
   });
 };
 
-export const createProducts = async (prisma: PrismaClient): Promise<void> => {
+export const createProducts = async (prisma: PrismaClient) => {
   await prisma.product.create({
     data: {
       name: 'Dynamite',
@@ -58,7 +58,7 @@ export const createProducts = async (prisma: PrismaClient): Promise<void> => {
   });
 };
 
-export const createCustomers = async (prisma: PrismaClient): Promise<void> => {
+export const createCustomers = async (prisma: PrismaClient) => {
   await prisma.customer.create({
     data: {
       username: 'user1',
@@ -117,7 +117,7 @@ export const createCustomers = async (prisma: PrismaClient): Promise<void> => {
   });
 };
 
-export const createAll = async (prisma: PrismaClient): Promise<void> => {
+export const createAll = async (prisma: PrismaClient) => {
   await prisma.company.create({
     data: {
       name: 'Acme',

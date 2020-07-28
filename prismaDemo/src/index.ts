@@ -6,6 +6,7 @@ import {
   findCompaniesThatMakeCarsOrPrinters,
 } from './utils/read';
 import { updateProductDescription } from './utils/update';
+import { deleteCustomer } from './utils/delete';
 
 const prisma = new PrismaClient();
 
@@ -25,8 +26,13 @@ const main = async (): Promise<void> => {
   const companies = await findCompaniesThatMakeCarsOrPrinters(prisma);
   console.dir(companies, { depth: null });
 
+  // Update product description
   const updatedProduct = await updateProductDescription(prisma);
   console.dir(updatedProduct, { depth: null });
+
+  // Delete a company (assumes there is a cascade relationship on fk)
+  const deletedCompany = await deleteCustomer(prisma);
+  console.dir(deletedCompany, { depth: null });
 };
 
 main()
