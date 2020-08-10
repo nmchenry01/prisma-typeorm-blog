@@ -22,7 +22,7 @@ export class Customer {
   @CreateDateColumn()
   createdAt: string;
 
-  @ManyToMany((type) => Product)
+  @ManyToMany(() => Product, (product) => product.customers, { eager: true })
   @JoinTable()
   products: Product[];
 }

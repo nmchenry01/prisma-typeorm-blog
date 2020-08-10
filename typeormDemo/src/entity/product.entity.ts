@@ -5,8 +5,10 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 import { Company } from './company.entity';
+import { Customer } from './customer.entity';
 
 @Entity()
 export class Product {
@@ -22,7 +24,10 @@ export class Product {
   @CreateDateColumn()
   createdAt: string;
 
-  @ManyToOne((type) => Company, (company) => company.products)
+  @ManyToOne(() => Company, (company) => company.products)
   @JoinColumn({ name: 'companyId' })
   company: Company;
+
+  @ManyToMany(() => Customer, (customer) => customer.products)
+  customers: Customer[];
 }

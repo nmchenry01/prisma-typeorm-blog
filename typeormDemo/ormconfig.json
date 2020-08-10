@@ -7,6 +7,6 @@
   "database": "postgres",
   "synchronize": true,
   "entities": [
-      "**/*.entity{.ts,.js}"
+      "**/*.entity.js"
   ]
 }

@@ -18,6 +18,6 @@ export class Company {
   @CreateDateColumn()
   createdAt: string;
 
-  @OneToMany((type) => Product, (product) => product.company)
+  @OneToMany(() => Product, (product) => product.company)
   products: Product[];
 }
